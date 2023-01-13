@@ -10,25 +10,35 @@ function conectionDB(){
   } 
   return $mysqli;
 } 
-function listarTablaProducto(){
+function listarTablaProductos(){
   $con = conectionDB();
-  $result = $con->query("SELECT * FROM products");
-  echo "<thead class='thead-dark'>
+  $result = $con->query("SELECT * FROM productos");
+  echo '<table class="table table-striped table-dark">
+        <thead class="thead-dark">
           <tr>
-            <th>#</th>
+            <th>ID</th>
             <th>Producto</th>
+            <th>Garantia</th>
           </tr>
         </thead>
-        <tbody>";
-  $contador = 0;
+        <tbody>';
   while($row = $result->fetch_assoc()) {
-    $contador = $contador+1;
-   echo "<tr>
-          <th>$contador</th>
-          <td>".$row["name"]."</td>
-        </tr>";
+   echo '<tr>
+          <th>'.$row["id"].'</th>
+          <td>'.$row["nombre"].'</td>
+          <td>'.$row["garantia"].'</td>
+        </tr>';
   }
-  echo "</tbody>";
+  echo '</tbody>
+        </table>';
+  $con->close();
+}
+function buscarProducto($codigo){
+  $con = conectionDB();
+  $result = $con->query("SELECT * FROM productos WHERE id = '$codigo'");
+  $row = $result->fetch_assoc();
+  $garantia=$row['garantia'];
+  echo "el producto ingresado de codigo: ".$codigo." , ".$garantia." tiene garantia.";
   $con->close();
 }
 ?>
