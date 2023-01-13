@@ -4,7 +4,8 @@
   </head>
   <body>
   <table class="table">
-    <?php include 'funciones/funciones.php';
+    <?php 
+      include 'funciones/funciones.php';
       listarTablaProducto(); 
     ?>
   </table>
